@@ -20,12 +20,12 @@ class Clearance::UsersController < Clearance::BaseController
     if @user.save
       sign_in @user
       redirect_back_or url_after_create
-      Meter.create(id:(3*current_user.id-2),value:10000,type_id:1,user_id:current_user.id,valueStartMonth:9000)
-      Meter.create(id:(3*current_user.id-1),value:15000,type_id:2,user_id:current_user.id,valueStartMonth:14500)
-      Meter.create(id:(3*current_user.id),value:20000,type_id:3,user_id:current_user.id,valueStartMonth:19300)
-      Limite.create(id:(3*current_user.id-2),value:50,meter_id:(3*current_user.id-2))
-      Limite.create(id:(3*current_user.id-1),value:50,meter_id:(3*current_user.id-1))
-      Limite.create(id:(3*current_user.id),value:50,meter_id:(3*current_user.id))
+      Meter.create(id:(3*current_user.id-2),value:Random.rand(19000...20000),type_id:1,user_id:current_user.id,valueStartMonth:Random.rand(18000...19000))
+      Meter.create(id:(3*current_user.id-1),value:Random.rand(29000...30000),type_id:2,user_id:current_user.id,valueStartMonth:(28000...29000))
+      Meter.create(id:(3*current_user.id),value:Random.rand(39000...40000),type_id:3,user_id:current_user.id,valueStartMonth:(38000...39000))
+      Limite.create(id:(3*current_user.id-2),value:Random.rand(30...100),meter_id:(3*current_user.id-2))
+      Limite.create(id:(3*current_user.id-1),value:Random.rand(30...100),meter_id:(3*current_user.id-1))
+      Limite.create(id:(3*current_user.id),value:Random.rand(30...100),meter_id:(3*current_user.id))
     else
       render template: "users/new"
     end
