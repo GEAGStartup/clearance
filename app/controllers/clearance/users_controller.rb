@@ -21,11 +21,58 @@ class Clearance::UsersController < Clearance::BaseController
       sign_in @user
       redirect_back_or url_after_create
       Meter.create(id:(3*current_user.id-2),value:Random.rand(19000...20000),type_id:1,user_id:current_user.id,valueStartMonth:Random.rand(18000...19000))
-      Meter.create(id:(3*current_user.id-1),value:Random.rand(29000...30000),type_id:2,user_id:current_user.id,valueStartMonth:(28000...29000))
-      Meter.create(id:(3*current_user.id),value:Random.rand(39000...40000),type_id:3,user_id:current_user.id,valueStartMonth:(38000...39000))
+      Meter.create(id:(3*current_user.id-1),value:Random.rand(29000...30000),type_id:2,user_id:current_user.id,valueStartMonth:Random.rand(28000...29000))
+      Meter.create(id:(3*current_user.id),value:Random.rand(39000...40000),type_id:3,user_id:current_user.id,valueStartMonth:Random.rand(38000...39000))
       Limite.create(id:(3*current_user.id-2),value:Random.rand(30...100),meter_id:(3*current_user.id-2))
       Limite.create(id:(3*current_user.id-1),value:Random.rand(30...100),meter_id:(3*current_user.id-1))
       Limite.create(id:(3*current_user.id),value:Random.rand(30...100),meter_id:(3*current_user.id))
+      d = Date.new(2017,05,01)
+      while d.day<31 do
+        Consumption.create(value:Random.rand(1...50),date:d,meter_id:(3*current_user.id-2))
+        d=Date.new(2017,05,((d.day)+1))
+      end
+      e = Date.new(2017,05,01)
+      while e.day<31 do
+        Consumption.create(value:Random.rand(1...50),date:e,meter_id:(3*current_user.id-1))
+        e=Date.new(2017,05,((e.day)+1))
+      end
+      f = Date.new(2017,05,01)
+      while f.day<31 do
+        Consumption.create(value:Random.rand(1...50),date:f,meter_id:(3*current_user.id))
+        f=Date.new(2017,05,((f.day)+1))
+      end
+
+      d = Date.new(2017,06,01)
+      f = Date.today
+      while d.day<f.day do
+        Consumption.create(value:Random.rand(1...50),date:d,meter_id:(3*current_user.id-2))
+        d=Date.new(2017,06,((d.day)+1))
+      end
+      while d.day<30
+        Consumption.create(value:0,date:d,meter_id:(3*current_user.id-2))
+        d=Date.new(2017,06,((d.day)+1))
+      end
+      Consumption.create(value:0,date:d,meter_id:(3*current_user.id-2))
+      d = Date.new(2017,06,01)
+      while d.day<f.day do
+        Consumption.create(value:Random.rand(1...50),date:d,meter_id:(3*current_user.id-1))
+        d=Date.new(2017,06,((d.day)+1))
+      end
+      while d.day<30
+        Consumption.create(value:0,date:d,meter_id:(3*current_user.id-1))
+        d=Date.new(2017,06,((d.day)+1))
+      end
+      Consumption.create(value:0,date:d,meter_id:(3*current_user.id-1))
+      d = Date.new(2017,06,01)
+      while d.day<f.day do
+        Consumption.create(value:Random.rand(1...50),date:d,meter_id:(3*current_user.id))
+        d=Date.new(2017,06,((d.day)+1))
+      end
+      while d.day<30
+        Consumption.create(value:0,date:d,meter_id:(3*current_user.id))
+        d=Date.new(2017,06,((d.day)+1))
+      end
+      Consumption.create(value:0,date:d,meter_id:(3*current_user.id))
     else
       render template: "users/new"
     end
